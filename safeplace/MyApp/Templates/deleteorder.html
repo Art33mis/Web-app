@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="container wrapper">
+      <div class="row">
+        <div class="col">
+          <h4 class="mt-3 text-primary">Удалить заказ {{data.0.oid}}</h4>
+          <form class="main-form" id="mainForm" action="index.php?page=deleteorder&oid={{data.0.oid}}" method="POST">
+              <div class="input-group mb-3">
+                  <span class="input-group-text">ID</span>
+                  <select class="form-select" name="oid"  id = "oid" required = "required" required>
+                      {% for i in data.data %}
+                      <option  value={{i.oid}} {%if i.oid==0.oid %} selected {% endif %}>{{ i.oid }}</option>
+                      {% endfor %}
+                  </select>
+            <div class="input-group mb-3">
+              <span class="input-group-text">№ заказа</span>
+              <input type="text" class="form-control" placeholder="№ заказа" name="order_num" id="orderNumber" value="{{data.data.0.order_num}}" required>
+            </div>
+            <text style = "display: none;"class = "error_text">Выберите клиента</text>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Клиент</span>
+              <select class="form-select" name="client" id = "client" required = "required" required>
+                {% for n in names %}
+                 <option value={{n.ID}} {%if n.ID==data.0.client_id %} selected {% endif %}>{{ n.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+                  <div class="input-group mb-3">
+                      <span class="input-group-text">Дата</span>
+                      <input data-datepicker="" name="order_date" class="form-control" id="order_date"  value="{{data.data.0.order_date}}" placeholder="yyyy-mm-dd" required>
+                  </div>
+            <button class = "btn main_btn" type = "sumbit" name ="submit" id = "create" value = ""> <text> Удалить </text></button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endblock %}

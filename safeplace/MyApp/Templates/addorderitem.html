@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block body %}
+<form class="main-form" id="mainForm" action="index.php?page=addorderitem&oid={{oid}}" method="POST">
+  <div class="input-group mb-3">
+    <span class="input-group-text">ID</span>
+    <input name="oid" class="form-control" id="oid" type="text" value = {{oid}}>
+  </div>
+  <table class="table main-table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th scope="col">название товара</th>
+        <th scope="col">колличество товара в заказ</th>
+        <th scope="col">функции</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th><select class="form-select" name="item_id" id = "client" required = "required" required>
+      <option value="0">Выберите товар</option>
+      {% for c in catalog %}
+       <option value={{c.item_id}}>{{ c.item_name }}</option>
+      {% endfor %}
+    </select></th>
+        <th>
+          <input class = "form-control" type = "number" name = "quantity" placeholder = "Введите необходимое коллиество" min = "0">
+        </th>
+        <th>
+          <button class = "btn" type = "sumbit" name ="addorderitem" id = "addorderitem " value = ""><text> добавить </text></button>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+  </form>
+{% endblock %}

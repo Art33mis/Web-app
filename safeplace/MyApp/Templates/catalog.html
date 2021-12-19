@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block body %}
+<h4 class="mt-3 text-primary">Поиск</h4>
+<form class="main-form" id="mainForm" action="index.php?page=catalog" method="POST">
+  <div class="input-group mb-3">
+    <span class="input-group-text">Название</span>
+    <input name="item_name" class="form-control" id="item_name" type="text">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text">Описание</span>
+    <input name="description" class="form-control" id="description" type="text">
+  </div>
+    <div class = "row">
+      <div class = "col-md-6">
+        <span class="input-group-text">Цена от</span>
+        <input name="minprice" class="form-control" id="minprice" type="text">
+      </div>
+      <div class = "col-md-6">
+        <span class="input-group-text">Цена до</span>
+        <input name="maxprice" class="form-control" id="maxprice" type="text">
+      </div>
+    </div>
+    <div class = "row">
+      <div class = "col centered">
+        <button class = "btn" name="search" id = "search">Поиск</button>
+      </div>
+    </div>
+  
+</form>
+<h5 class="mt-3 text-primary">Каталог</h5>
+<table class="table main-table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th scope="col">id товара</th>
+      <th scope="col">название товара</th>
+      <th scope="col">описание</th>
+      <th scope="col">цена товара</th>
+      <th scope="col">количество заказов</th>
+      <th scope="col">функции</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in data %}
+    <tr>
+      <th scope="row">{{p.item_id}}</th>
+      <th>{{p.item_name}}</th>
+      <th>{{p.description}}</th>
+      <th>{{p.price}}</th>
+      <th>{{p.count}}</th>
+      <th>
+        <form id="mainForm" action="index.php?page=editcatalogitem&oid={{p.item_id}}" method="POST">
+      <button class = "btn" type = "sumbit" name ="modify"  value = ""><text> Изменить </text></button>
+      </form>
+      <form id="mainForm" action="index.php?page=deletecatalogitem&itemid={{p.item_id}}" method="POST">
+      <button class = "btn" type = "sumbit" name ="del"  value = ""> <text> Удалить </text></button>
+      </form>
+      </th>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

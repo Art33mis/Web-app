@@ -1,0 +1,85 @@
+ {% extends 'base.html' %}
+  {% block body %}
+      <div class="container wrapper">
+        <div class="row">
+          <div class="col">
+            <h4 class="mt-3 text-primary">Список заказов</h4>
+            <form class="main-form" id="mainForm" action="index.php?page=listorders" method="POST">
+              <div class="input-group mb-3">
+                <span class="input-group-text">Клиент</span>
+                <select class="form-select" name="client_id">
+                  <option value="0" selected>Выберите клиента...</option>
+                  {% for n in names %}
+                   <option value={{n.ID}}>{{ n.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">№ заказа</span>
+                <input type="text" class="form-control" placeholder="№ заказа" name="order_num">
+              </div>
+              <div class="input-group mb-3">
+                  <span class="input-group-text">Дата</span>
+                  <input data-datepicker="" name="order_date" class="form-control" id="date" type="text" placeholder="yyyy-mm-dd">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Количество записей на странице</span>
+                <select class="form-select" name="items_per_page">
+                  <option value="1">30</option>
+                  <option value="2">5</option>
+                  <option value="3">10</option>
+                  <option value="4">20</option>
+                </select>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Номер страницы</span>
+                <select class="form-select" name="items_per_page">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </div>
+              <button class = "btn" type = "sumbit" name ="filter"  value = ""><text> Найти </text></button>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h5 class="text-primary">Заказы</h5>
+            <table class="table main-table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">id заказа</th>
+                  <th scope="col">номер заказа</th>
+                  <th scope="col">дата заказа</th>
+                  <th scope="col">клиент</th>
+                  <th scope="col">количество товаров</th>
+                  <th scope="col">сумма заказа</th>
+                  <th scope="col">функции</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for p in data %}
+                <tr>
+                  <th scope="row">{{ p.oid }}</th>
+                  <th>{{ p.order_num }}</th>
+                  <th>{{ p.order_date }}</th>
+                  <th>{{ p.name }}</th>
+                  <th>{{p.count}}</th>
+                  <th>{{p.sum}}</th>
+                  <th>
+                    <form id="mainForm" action="index.php?page=editorder&oid={{p.oid}}" method="POST">
+                    <button class = "btn" type = "sumbit" name ="modify"  value = ""><text> Изменить </text></button>
+                    </form>
+                    <form id="mainForm" action="index.php?page=deleteorder&oid={{p.oid}}" method="POST">
+                    <button class = "btn" type = "sumbit" name ="del"  value = ""> <text> Удалить </text></button>
+                    </form>
+                  </th>
+                </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      {% endblock %}

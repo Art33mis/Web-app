@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block body %}
+          <h4 class="mt-3 text-primary">Изменить клиента</h4>
+          <form class="main-form" id="mainForm" action="index.php?page=deleteclient&clientid={{data.0.ID}}" method="POST">
+            <div class="input-group mb-3">
+              <span class="input-group-text">Фамилия</span>
+              <input name="lastname" class="form-control" id="lastname" type="text" value = {{data.0.lastname}} >
+            </div>
+            
+            <div class="input-group mb-3">
+              <span class="input-group-text">Имя</span>
+              <input name="firstname" class="form-control" id="firstname" type="text" value = {{data.0.firstname}}>
+            </div>
+            
+            <div class="input-group mb-3">
+                <span class="input-group-text">Дата рождения</span>
+                <input data-datepicker="" name="birthdate" class="form-control" id="birthdate" type="text" placeholder="dd/mm/yyyy" value = {{data.0.birthdate}}>
+            </div>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text">Адрес</span>
+              <input name="address" class="form-control" id="addres" type="text" value = {{data.0.address}}>
+            </div>
+            <div class = "row">
+              <div class = "col centered"><button class = "btn" type = "sumbit" name ="changecatalogitem" id = "changecatalogitem" value = ""> <text> Удалить </text></button></div>
+            </div>        
+          </form>
+{% endblock %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel='stylesheet' href='./css/bootstrap.css'>
+    <link rel='stylesheet' href='./css/index.css'>
+    <!-- https://mymth.github.io/vanillajs-datepicker/#/ https://themesberg.com/docs/volt-bootstrap-5-dashboard/plugins/datepicker/ -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
+    <title></title>
+  </head>
+  <body>
+    <div class = "row">
+      <div class = "col centered">
+        <a href="index.php?page=catalog"><text>Каталог</text></a>
+        <a href="index.php?page=listclients"><text>Список клиентов</text></a>
+        <a href="index.php?page=listorders"><text>Список заказов</text></a>
+      </div>
+    </div>
+  {% for error in data.errors %}
+    <div id = "error" class="alert alert-warning alert-dismissible" role="alert">
+      <div>
+        <strong>Ошибка!</strong> {{error.description}}
+        <button class = "cross"type = "button" id = "close">
+          <span>&times;</span>
+        </button>
+      </div>
+    </div>
+  {% endfor %}
+    <div class="container wrapper">
+        <div class="row">
+            <div class="col">
+  {% block body %}
+  {% endblock %}
+            </div>
+        </div>
+    </div>
+  <script src="./js/bootstrap.bundle.js"></script>
+    <script>
+      let datepickers = [].slice.call(document.querySelectorAll('[data-datepicker]'))
+      let datepickersList = datepickers.map(function (el) {
+          return new Datepicker(el, {
+              buttonClass: 'btn',
+              format: 'yyyy-mm-dd'
+          });
+      });
+        var popbox = document.getElementById("error");
+        var cross = document.getElementById("close");
+        cross.onclick = function () {
+        popbox.style.display = "none";
+        };
+    </script>
+  </body>
+</html>

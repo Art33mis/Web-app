@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block body %}    
+<h4 class="mt-3 text-primary">Создание клиента</h4>
+<form class="main-form" id="mainForm"  action="index.php?page=addclient" method="POST">
+  <div class="input-group mb-3">
+    <span class="input-group-text">Фамилия</span>
+    <input name="lastname" class="form-control" id="lastname" type="text">
+  </div>
+
+  <text style = "display: none;"class = "error_comit">Введите имя</text>
+  <div class="input-group mb-3">
+    <span class="input-group-text">Имя</span>
+    <input name="firstname" class="form-control" id="firstname" type="text">
+  </div>
+
+  <text style = "display: none;"class = "error_comit">Неверный формат даты</text>
+  <div class="input-group mb-3">
+      <span class="input-group-text">Год рождения</span>
+      <input data-datepicker="" name="birthdate" class="form-control" id="birthdate" type="text" placeholder="dd/mm/yyyy">
+  </div>
+  
+  <text style = "display: none;"class = "error_comit">Введите адрес</text>
+  <div class="input-group mb-3">
+    <span class="input-group-text">Адрес</span>
+    <input name="address" class="form-control" id="addres" type="text">
+  </div>
+  <div class = "row ">
+    <div class = "col centered"><button class = "btn " name="addclient">Создать</button></div>
+  </div>
+</form>
+{% endblock %}
